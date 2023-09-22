@@ -7,7 +7,7 @@ class PostController extends Controller
   public function index()
   {
     return view('posts', [
-      "title" => "Posts",
+      "title" => "Post",
       'posts' =>  [
         [
           "title" => "Title Pertama",

@@ -15,7 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-  return view('Home');
+  return view('home', [
+    "title" => "Home"
+  ]);
 });
 
 Route::get('/posts', [PostController::class, "index"]);
+
+Route::get('/categories', function () {
+  return view('categories', [
+    "title" => "Category"
+  ]);
+});
