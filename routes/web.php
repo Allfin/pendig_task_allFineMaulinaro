@@ -21,8 +21,10 @@ Route::get('/', function () {
   ]);
 });
 
-Route::get('/posts', [PostController::class, "index"]);
-
+Route::get('/posts/', [PostController::class, "index"]);
+Route::get('/posts/create', [PostController::class, "create"]);
+Route::post('/posts/create', [PostController::class, "store"]);
+// Route::get('/posts/update', [PostController::class, "create"]);
 Route::get('/posts/{post:slug}', [PostController::class, "show"]);
 
 Route::get('/categories', function () {
