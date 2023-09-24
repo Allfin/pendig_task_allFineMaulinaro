@@ -26,12 +26,13 @@
 			</ul>
 		</div>
 		<div class="col-lg-8">
-			<h2>Create New Post</h2>
+			<h2>Edit Post</h2>
 			<hr>
 			<form
 				method="post"
-				action="/dashboard/posts"
+				action="/dashboard/posts/{{ $post->slug }}"
 			>
+				@method('put')
 				@csrf
 				<div class="mb-3">
 					<label
@@ -43,6 +44,7 @@
 						class="form-control @error('title')is-invalid @enderror"
 						name="title"
 						id="title"
+						value="{{ old('title', $post->title) }}"
 						autofocus
 					>
 					@error('title')
@@ -58,14 +60,12 @@
 					>Slug</label>
 					<input
 						type="slug"
-						class="form-control @error('slug') is-invalid @enderror"
+						class="form-control"
 						name="slug"
 						id="slug"
 						readonly
+						value="{{ old('slug', $post->slug) }}"
 					>
-					@error('slug')
-						{{ $message }}
-					@enderror
 				</div>
 				<div class="mb-3">
 					<select
@@ -75,7 +75,7 @@
 					>
 						<option selected>Select Category</option>
 						@foreach ($categories as $category)
-							@if (old('category_id') == $category->id)
+							@if (old('category_id', $post->category_id) == $category->id)
 								<option
 									value="{{ $category->id }}"
 									selected
@@ -95,6 +95,7 @@
 						type="hidden"
 						id="body"
 						name="body"
+						value="{{ old('body', $post->body) }}"
 					>
 					<trix-editor input="body"></trix-editor>
 					@error('body')
@@ -104,7 +105,7 @@
 				<button
 					type="submit"
 					class="btn btn-primary"
-				>Submit</button>
+				>Update Post</button>
 			</form>
 		</div>
 	</div>
@@ -119,8 +120,8 @@
 				.then(data => slug.value = data.slug)
 		});
 
-		// document.addEventListener('trix-file-accept', function(event) {
-		// 	event.preventDefault()
-		// })
+		document.addEventListener('trix-file-accept', function(event) {
+			event.preventDefault()
+		})
 	</script>
 @endsection

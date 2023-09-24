@@ -13,7 +13,6 @@ class DashboardPostController extends Controller
 {
   /**
    * Display a listing of the resource.
-   *
    */
   public function index()
   {
@@ -27,8 +26,6 @@ class DashboardPostController extends Controller
 
   /**
    * Show the form for creating a new resource.
-   *
-   * @return \Illuminate\Http\Response
    */
   public function create()
   {
@@ -42,15 +39,13 @@ class DashboardPostController extends Controller
 
   /**
    * Store a newly created resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @return \Illuminate\Http\Response
    */
   public function store(Request $request)
   {
     $validatedData = $request->validate([
       'title' => 'required|max:255',
       'category_id' => 'required',
+      'slug' => 'required|unique:posts',
       'body' => 'required'
     ]);
 
@@ -62,9 +57,6 @@ class DashboardPostController extends Controller
 
   /**
    * Display the specified resource.
-   *
-   * @param  \App\Models\Post  $post
-   *
    */
   public function show(Post $post)
   {
@@ -78,32 +70,42 @@ class DashboardPostController extends Controller
 
   /**
    * Show the form for editing the specified resource.
-   *
-   * @param  \App\Models\Post  $post
-   * @return \Illuminate\Http\Response
    */
   public function edit(Post $post)
   {
-    //
+    return view('dashboard.post.edit', [
+      "title" => "Create new post",
+      "active" => "Dashboard",
+      "navActive" => "Post",
+      "post" => $post,
+      "categories" => Category::latest()->get()
+    ]);
   }
 
   /**
    * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  \App\Models\Post  $post
-   * @return \Illuminate\Http\Response
    */
   public function update(Request $request, Post $post)
   {
-    //
+    $rules = [
+      'title' => 'required|max:255',
+      'category_id' => 'required',
+      'body' => 'required'
+    ];
+
+    if ($request->slug != $post->slug) {
+      $rules['slug'] = 'required|unique:post';
+    }
+
+    $validatedData = $request->validate($rules);
+
+    Post::where('id', $post->id)
+      ->update($validatedData);
+    return redirect('/dashboard/posts')->with('success', 'Post has been updated!');
   }
 
   /**
    * Remove the specified resource from storage.
-   *
-   * @param  \App\Models\Post  $post
-   * @return \Illuminate\Http\Response
    */
   public function destroy(Post $post)
   {

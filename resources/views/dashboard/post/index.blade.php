@@ -68,7 +68,7 @@
 										</span>
 									</a>
 									<a
-										href=""
+										href="/dashboard/posts/{{ $post->slug }}/edit"
 										class="btn bg-warning badge"
 									>
 										<span
