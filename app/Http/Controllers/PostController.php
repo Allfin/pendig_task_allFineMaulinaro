@@ -18,22 +18,6 @@ class PostController extends Controller
     ]);
   }
 
-
-  // Untuk menambah post
-  public function create()
-  {
-    return view('create', [
-      "title" => "Create Posts",
-      "active" => "Post"
-    ]);
-  }
-
-  // Push data ke base
-  public function store(Request $request)
-  {
-    return $request;
-  }
-
   // Untuk mengambil satu post sesuai paramater di route
   public function show(Post $post)
   {
@@ -42,11 +26,5 @@ class PostController extends Controller
       "active" => "Post",
       'post' =>  $post
     ]);
-  }
-
-  public function checkSlug(Request $request)
-  {
-    $slug = SlugService::createSlug(Post::class, 'slug', $request->title);
-    return response()->json(['slug' => $slug]);
   }
 }

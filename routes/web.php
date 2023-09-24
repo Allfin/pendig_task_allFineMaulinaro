@@ -25,22 +25,17 @@ Route::get('/', function () {
   ]);
 });
 
+// untuk menampilkan semua nama postingan
 Route::get('/posts', [PostController::class, "index"]);
-
-Route::get('/posts/create', [PostController::class, "create"]);
-
-Route::post('/posts/create', [PostController::class, "store"]);
-
-
-// Route::get('/posts/update', [PostController::class, "create"]);
 Route::get('/posts/{post:slug}', [PostController::class, "show"]);
 
-Route::get('/categories', [CategoryController::class, "index"]);
 
+// untuk menampilkan semua nama category
+Route::get('/categories', [CategoryController::class, "index"]);
+// untuk melihat postingan yang yang diiginkan
 Route::get('/categories/{category:slug}', [CategoryController::class, 'show']);
 
-Route::get('/dashboard', [DashboardController::class, 'index']);
-
+// untuk memeriksa apakah slug sudah ada atau belum
 Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, "checkSlug"]);
-Route::get('/posts/checkSlug', [PostController::class, "checkSlug"]);
+// route untu DashboardPostController
 Route::resource('/dashboard/posts', DashboardPostController::class);
