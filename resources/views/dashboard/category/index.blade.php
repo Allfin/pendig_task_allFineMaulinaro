@@ -29,6 +29,10 @@
 			<h3>{{ $title }}</h3>
 			<hr>
 			<table class="table-striped table-sm table">
+				<a
+					href="/dashboard/category/create"
+					class="btn btn-primary mb-3"
+				>Create new category</a>
 				<thead>
 					<tr>
 						<th scope="col">#</th>

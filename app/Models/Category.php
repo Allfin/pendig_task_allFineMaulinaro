@@ -11,10 +11,11 @@ class Category extends Model
   // menggunakan factory dan sluggable
   use HasFactory, Sluggable;
 
-  // selain id semua bisa di ubah
-  // protected $guarded = [
-  //   'id'
-  // ];
+  protected $fillable = [
+    'name',
+    'slug',
+    'id'
+  ];
 
   public function sluggable(): array
   {

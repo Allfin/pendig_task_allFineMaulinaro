@@ -12,8 +12,6 @@ class DashboardCategoryController extends Controller
 {
   /**
    * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\Response
    */
   public function index()
   {
@@ -27,12 +25,14 @@ class DashboardCategoryController extends Controller
 
   /**
    * Show the form for creating a new resource.
-   *
-   * @return \Illuminate\Http\Response
    */
   public function create()
   {
-    //
+    return view('dashboard.category.create', [
+      "title" => "Category",
+      "active" => "Dashboard",
+      "navActive" => "Category",
+    ]);
   }
 
   /**
@@ -43,13 +43,16 @@ class DashboardCategoryController extends Controller
    */
   public function store(Request $request)
   {
+    $validatedData = $request->validate([
+      "name" => "required|max:20|unique:categories",
+      "slug" =>  "required|unique:categories"
+    ]);
+    Category::create($validatedData);
+    return redirect('/dashboard/category')->with('success', 'Category has been added!');
   }
 
   /**
    * Display the specified resource.
-   *
-   * @param  \App\Models\Category  $category
-   * @return \Illuminate\Http\Response
    */
   public function show(Category $category)
   {
@@ -64,9 +67,6 @@ class DashboardCategoryController extends Controller
 
   /**
    * Show the form for editing the specified resource.
-   *
-   * @param  \App\Models\Category  $category
-   * @return \Illuminate\Http\Response
    */
   public function edit(Category $category)
   {
