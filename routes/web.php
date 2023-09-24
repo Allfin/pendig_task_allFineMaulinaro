@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\PostController;
+use App\Models\Category;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,9 +34,6 @@ Route::get('/posts/checkSlug', [PostController::class, "checkSlug"]);
 // Route::get('/posts/update', [PostController::class, "create"]);
 Route::get('/posts/{post:slug}', [PostController::class, "show"]);
 
-Route::get('/categories', function () {
-  return view('categories', [
-    "title" => "Category",
-    "active" => "Category"
-  ]);
-});
+Route::get('/categories', [CategoryController::class, "index"]);
+
+Route::get('/categories/{category:slug}', [CategoryController::class, 'show']);
