@@ -43,13 +43,23 @@
 						class="feather"
 						data-feather="edit"
 					></span> Edit</a>
-				<a
-					href=""
-					class="btn btn-danger"
-				><span
-						class="feather"
-						data-feather="x-circle"
-					></span> Delete</a>
+
+				<form
+					action="/dashboard/posts/{{ $post->slug }}"
+					method="post"
+				>
+					@method('delete')
+					@csrf
+
+					<button
+						class="btn btn-danger border-0"
+						onclick="return confirm('Are you sure ?')"
+					><span
+							class="feather"
+							data-feather="x-circle"
+						>
+						</span> Delete</button>
+				</form>
 			</div>
 
 			<img

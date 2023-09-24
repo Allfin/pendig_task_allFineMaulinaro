@@ -77,16 +77,22 @@
 										>
 										</span>
 									</a>
-									<a
-										href=""
-										class="btn bg-danger badge"
+									<form
+										action="/dashboard/posts/{{ $post->slug }}"
+										method="post"
 									>
-										<span
-											class="feather"
-											data-feather="x-circle"
-										>
-										</span>
-									</a>
+										@method('delete')
+										@csrf
+
+										<button
+											class="badge bg-danger border-0"
+											onclick="return confirm('Are you sure ?')"
+										><span
+												class="feather"
+												data-feather="x-circle"
+											>
+											</span></button>
+									</form>
 								</td>
 							</tr>
 						@endforeach
