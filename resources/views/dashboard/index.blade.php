@@ -14,7 +14,7 @@
 				<li class="nav-item">
 					<a
 						class="nav-link {{ $navActive === 'Post' ? 'link-primary' : 'link-dark' }}"
-						href="/dashboard/post"
+						href="/dashboard/posts"
 					>Post</a>
 				</li>
 				<li class="nav-item">

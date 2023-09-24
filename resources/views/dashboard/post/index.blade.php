@@ -26,9 +26,21 @@
 			</ul>
 		</div>
 		<div class="content col-md-10">
+			@if (session()->has('success'))
+				<div
+					class="alert alert-primary"
+					role="alert"
+				>
+					{{ session('success') }}
+				</div>
+			@endif
 			<h3>{{ $title }}</h3>
 			<hr>
 			<div class="table-responsive small">
+				<a
+					href="/dashboard/posts/create"
+					class="btn btn-primary mb-3"
+				>Create new post</a>
 				<table class="table-striped table-sm table">
 					<thead>
 						<tr>

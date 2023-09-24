@@ -31,7 +31,6 @@ Route::get('/posts/create', [PostController::class, "create"]);
 
 Route::post('/posts/create', [PostController::class, "store"]);
 
-Route::get('/posts/checkSlug', [PostController::class, "checkSlug"]);
 
 // Route::get('/posts/update', [PostController::class, "create"]);
 Route::get('/posts/{post:slug}', [PostController::class, "show"]);
@@ -42,4 +41,6 @@ Route::get('/categories/{category:slug}', [CategoryController::class, 'show']);
 
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
+Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, "checkSlug"]);
+Route::get('/posts/checkSlug', [PostController::class, "checkSlug"]);
 Route::resource('/dashboard/posts', DashboardPostController::class);
