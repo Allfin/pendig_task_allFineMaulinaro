@@ -27,12 +27,13 @@ Route::get('/', function () {
 
 // untuk menampilkan semua nama postingan
 Route::get('/posts', [PostController::class, "index"]);
+// untuk melihat postingan diiginkan
 Route::get('/posts/{post:slug}', [PostController::class, "show"]);
 
 
 // untuk menampilkan semua nama category
 Route::get('/categories', [CategoryController::class, "index"]);
-// untuk melihat postingan yang yang diiginkan
+// untuk melihat postingan yang memiliki category diiginkan
 Route::get('/categories/{category:slug}', [CategoryController::class, 'show']);
 
 // untuk memeriksa apakah slug sudah ada atau belum

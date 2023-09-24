@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+  // untuk menampilkan semua category
   public function index()
   {
     return view('category', [
@@ -16,6 +17,7 @@ class CategoryController extends Controller
     ]);
   }
 
+  // untuk melihat postingan yang memiliki category diiginkan
   public function show(Category $category)
   {
     return view('posts', [
