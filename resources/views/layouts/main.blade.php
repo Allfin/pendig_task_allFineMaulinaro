@@ -22,10 +22,13 @@
 		rel="stylesheet"
 		href="/css/trix.css"
 	>
-	<script
-		type="text/javascript"
-		src="/js/trix.js"
-	></script>
+
+	<style>
+		.feather {
+			width: 18px;
+			height: 18px;
+		}
+	</style>
 
 	<style>
 		trix-toolbar [data-trix-button-group="file-tools"] {
@@ -40,7 +43,7 @@
 
 	@include('partials.navbar')
 
-	<div class="container my-4">
+	<div class="{{ $active === 'Dashboard' ? 'container-fluid' : ' container' }} my-4">
 		@yield('container')
 	</div>
 
@@ -50,6 +53,18 @@
 		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 		crossorigin="anonymous"
 	></script>
+
+	{{-- Trix Editor --}}
+	<script
+		type="text/javascript"
+		src="/js/trix.js"
+	></script>
+
+	{{-- Icon --}}
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script>
+		feather.replace();
+	</script>
 </body>
 
 </html>

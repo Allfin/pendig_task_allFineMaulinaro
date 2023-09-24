@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
-	<div class="container">
+	<div class="{{ $active === 'Dashboard' ? 'container-fluid' : 'container' }}">
 		<a
 			class="navbar-brand"
 			href="/"
@@ -32,6 +32,12 @@
 					class="nav-link {{ $active === 'Category' ? 'active' : '' }}"
 					href="/categories"
 				>Category</a>
+			</div>
+			<div class="navbar-nav ms-auto">
+				<a
+					class="nav-link {{ $active === 'Dashboard' ? 'active' : '' }}"
+					href="/dashboard"
+				>Dashboard</a>
 			</div>
 		</div>
 	</div>

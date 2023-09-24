@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardPostController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PostController;
@@ -37,3 +39,7 @@ Route::get('/posts/{post:slug}', [PostController::class, "show"]);
 Route::get('/categories', [CategoryController::class, "index"]);
 
 Route::get('/categories/{category:slug}', [CategoryController::class, 'show']);
+
+Route::get('/dashboard', [DashboardController::class, 'index']);
+
+Route::resource('/dashboard/posts', DashboardPostController::class);
