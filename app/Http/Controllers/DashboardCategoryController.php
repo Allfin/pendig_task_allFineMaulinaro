@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
+
+use App\Models\Category;
 
 class DashboardCategoryController extends Controller
 {
@@ -67,7 +70,13 @@ class DashboardCategoryController extends Controller
    */
   public function edit(Category $category)
   {
-    //
+    return view('dashboard.category.edit', [
+      "title" => "Edit Category",
+      "active" => "Dashboard",
+      "navActive" => "Category",
+      "category" => $category,
+      "categories" => Category::latest()->get()
+    ]);
   }
 
   /**
@@ -79,7 +88,13 @@ class DashboardCategoryController extends Controller
    */
   public function update(Request $request, Category $category)
   {
-    //
+    $validatedData = $request->validate([
+      "name" => "required|max:20|unique:categories",
+      "slug" =>  "required|unique:categories"
+    ]);
+    Category::where('id', $category->id)
+      ->update($validatedData);
+    return redirect('/dashboard/category')->with('success', 'Category has been updated!');
   }
 
   /**
@@ -92,5 +107,12 @@ class DashboardCategoryController extends Controller
   {
     Category::destroy($category->id);
     return redirect('/dashboard/category')->with('success', 'Category has been deleted!');
+  }
+
+  // untuk cek slug sudah ada atau belum
+  public function checkSlug(Request $request)
+  {
+    $slug = SlugService::createSlug(Category::class, 'slug', $request->name);
+    return response()->json(['slug' => $slug]);
   }
 }

@@ -113,6 +113,7 @@ class DashboardPostController extends Controller
     return redirect('/dashboard/posts')->with('success', 'Post has been deleted!');
   }
 
+  // untuk cek slug sudah ada atau belum
   public function checkSlug(Request $request)
   {
     $slug = SlugService::createSlug(Post::class, 'slug', $request->title);

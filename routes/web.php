@@ -46,10 +46,12 @@ Route::get('/dashboard', function () {
   ]);
 });
 
-// untuk memeriksa apakah slug sudah ada atau belum
+// untuk memeriksa apakah slug postingan sudah ada atau belum
 Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, "checkSlug"]);
 // route untuk DashboardPostController
 Route::resource('/dashboard/posts', DashboardPostController::class);
 
+// untuk memeriksa apakah slug categoru sudah ada atau belum
+Route::get('/dashboard/category/checkSlug', [DashboardCategoryController::class, "checkSlug"]);
 // route untuk DashboardCategoryController
 Route::resource('/dashboard/category', DashboardCategoryController::class);

@@ -53,7 +53,7 @@
 									</span>
 								</a>
 								<a
-									href="/dashboard/category/{{ $category->category_id }}/edit"
+									href="/dashboard/category/{{ $category->slug }}/edit"
 									class="btn bg-warning badge"
 								>
 									<span
