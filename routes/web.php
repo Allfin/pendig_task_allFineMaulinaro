@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardCategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardPostController;
 use Illuminate\Support\Facades\Route;
@@ -36,7 +37,19 @@ Route::get('/categories', [CategoryController::class, "index"]);
 // untuk melihat postingan yang memiliki category diiginkan
 Route::get('/categories/{category:slug}', [CategoryController::class, 'show']);
 
+// index dashboard
+Route::get('/dashboard', function () {
+  return view('dashboard.index', [
+    "title" => "My Post",
+    "active" => "Dashboard",
+    "navActive" => "Dashboard",
+  ]);
+});
+
 // untuk memeriksa apakah slug sudah ada atau belum
 Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, "checkSlug"]);
-// route untu DashboardPostController
+// route untuk DashboardPostController
 Route::resource('/dashboard/posts', DashboardPostController::class);
+
+// route untuk DashboardCategoryController
+Route::resource('/dashboard/category', DashboardCategoryController::class);

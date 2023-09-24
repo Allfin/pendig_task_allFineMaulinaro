@@ -11,18 +11,18 @@ class Category extends Model
   use HasFactory;
 
   // selain id semua bisa di ubah
-  protected $guarded = [
-    'id'
-  ];
+  // protected $guarded = [
+  //   'id'
+  // ];
 
   // relasi ke post
   public function post()
   {
     return $this->hasMany(Post::class);
   }
-}
 
-// Category::create([
-//   'name' => "Personal",
-//   'slug' => "personal"
-// ])
+  public function getRouteKeyName()
+  {
+    return 'slug';
+  }
+}

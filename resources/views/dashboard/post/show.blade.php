@@ -37,7 +37,7 @@
 						data-feather="arrow-left"
 					></span> Back to all posts</a>
 				<a
-					href=""
+					href="/dashboard/posts/{{ $post->slug }}/edit"
 					class="btn btn-warning"
 				><span
 						class="feather"
@@ -47,6 +47,7 @@
 				<form
 					action="/dashboard/posts/{{ $post->slug }}"
 					method="post"
+					class="d-inline"
 				>
 					@method('delete')
 					@csrf

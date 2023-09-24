@@ -10,17 +10,17 @@
 						class="position-absolute px-3 py-2 text-white"
 						style="background-color: rgba(0, 0, 0, 0.7)"
 					><a
-							href="/categories/{{ $post->category->slug }}"
+							href="/categories/{{ $post->category?->slug }}"
 							class="text-decoration-none text-white"
-						>{{ $post->category->name }}</a></div>
+						>{{ $post->category?->name }}</a></div>
 					<a
 						href="/posts/{{ $post->slug }}"
 						class="text-decoration-none"
 					>
 						<img
-							src="https://source.unsplash.com/500x300/?{{ $post->category->name }}"
+							src="https://source.unsplash.com/500x300/?{{ $post->category?->name }}"
 							class="card-img-top"
-							alt="{{ $post->category->name }}"
+							alt="{{ $post->category?->name }}"
 						>
 					</a>
 					<div class="card-body">

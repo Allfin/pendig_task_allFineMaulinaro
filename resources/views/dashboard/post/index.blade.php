@@ -55,7 +55,7 @@
 							<tr>
 								<td>{{ $loop->iteration }}</td>
 								<td>{{ $post->title }}</td>
-								<td>{{ $post->category->name }}</td>
+								<td>{{ $post->category?->name }}</td>
 								<td>
 									<a
 										href="/dashboard/posts/{{ $post->slug }}"
@@ -80,6 +80,7 @@
 									<form
 										action="/dashboard/posts/{{ $post->slug }}"
 										method="post"
+										class="d-inline"
 									>
 										@method('delete')
 										@csrf

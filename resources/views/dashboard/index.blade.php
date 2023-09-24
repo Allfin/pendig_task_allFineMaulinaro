@@ -26,7 +26,8 @@
 			</ul>
 		</div>
 		<div class="content col-md-10">
-			asd
+			<h1>Welcome Back</h1>
+			<hr>
 		</div>
 	</div>
 @endsection
