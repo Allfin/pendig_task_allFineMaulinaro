@@ -1,46 +1,72 @@
 @extends('layouts.main')
 
 @section('container')
-	<h1>Halaman Create</h1>
-	<div class="row">
-		<div class="col-6">
-			<form
-				action="/posts/create"
-				method="POST"
-			>
-				@csrf
-				<div class="mb-3">
-					<label
-						for="titleFormControl"
-						class="form-label"
-					>Title</label>
-					<input
-						type="text"
-						class="form-control"
-						name="title"
-						placeholder="Masukan Title yang diinginkan"
-						required
-					>
-				</div>
-				<div class="mb-3">
-					<label
-						for="articleFormControl"
-						class="form-label"
-					>Isi Artikel</label>
-					<textarea
-					 type="text"
-					 class="form-control"
-					 name="body"
-					 placeholder="Masukan isi artikel yang diinginkan"
-					 style="height: 100px"
-					 required
-					></textarea>
-				</div>
-				<button
-					class="btn btn-primary w-100 py-2"
-					type="submit"
-				>Submit</button>
-			</form>
-		</div>
+	<div class="d-flex justify-content-between flex-md-nowrap align-items-center border-bottom mb-3 flex-wrap pb-2 pt-3">
+		<h1 class="h2">Create New Post</h1>
 	</div>
+
+	<div class="col-lg-8">
+		<form
+			method="post"
+			accept="/posts/create"
+		>
+			@csrf
+			<div class="mb-3">
+				<label
+					for="title"
+					class="form-label"
+				>Title</label>
+				<input
+					type="title"
+					class="form-control"
+					name="title"
+					id="title"
+				>
+			</div>
+			<div class="mb-3">
+				<label
+					for="slug"
+					class="form-label"
+				>Slug</label>
+				<input
+					type="slug"
+					class="form-control"
+					name="slug"
+					id="slug"
+					disabled
+				>
+			</div>
+			<div class="mb-3">
+				<label
+					for="body"
+					class="form-label"
+				>Body</label>
+				<input
+					type="hidden"
+					id="body"
+					name="body"
+				>
+				<trix-editor input="body"></trix-editor>
+			</div>
+			<button
+				type="submit"
+				class="btn btn-primary"
+			>Submit</button>
+		</form>
+	</div>
+
+	<script>
+		const title = document.querySelector('#title')
+		const slug = document.querySelector('#slug')
+
+		title.addEventListener('change', function() {
+			fetch('/posts/checkSlug?title=' + title.value)
+				.then(response => response.json())
+				.then(data => slug.value = data.slug)
+		});
+
+		document.addEventListener('trix-file-accept', function(event) {
+			event.preventDefault()
+		})
+	</script>
 @endsection

@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
+  // Unutk menampilkan posts
   public function index()
   {
     return view('posts', [
@@ -18,7 +19,7 @@ class PostController extends Controller
   }
 
 
-
+  // Untuk menambah post
   public function create()
   {
     return view('create', [
@@ -27,18 +28,13 @@ class PostController extends Controller
     ]);
   }
 
+  // Push data ke base
   public function store(Request $request)
   {
-    $data = [
-      "title" => $request->title,
-      "excerpt" => Str::words($request->body),
-      "body" => $request->body
-    ];
-
-    Post::create($data);
-    return redirect('/posts');
+    return $request;
   }
 
+  // Untuk mengambil satu post sesuai paramater di route
   public function show(Post $post)
   {
     return view('post', [
@@ -46,5 +42,11 @@ class PostController extends Controller
       "active" => "Post",
       'post' =>  $post
     ]);
+  }
+
+  public function checkSlug(Request $request)
+  {
+    $slug = SlugService::createSlug(Post::class, 'slug', $request->title);
+    return response()->json(['slug' => $slug]);
   }
 }
